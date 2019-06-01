@@ -118,7 +118,7 @@ class UsersController extends Controller
                 $tools->batch(function ($batch) {
                     $batch->disableDelete();
                 });
-        });
+            });
 
         return $grid;
     }
