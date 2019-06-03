@@ -14,8 +14,6 @@
 Route::get('/', 'PagesController@root')->name('root');
 Auth::routes();
 
-Route::get('/products', 'ProductsController@index')->name('products.index');
-Route::get('/products/{product}', 'ProductsController@show')->name('products.show');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/email_verify_notice', 'PagesController@emailVerifyNotice')->name('email_verify_notice');
@@ -32,10 +30,13 @@ Route::group(['middleware' => 'auth'], function() {
         Route::delete('user_addresses/{user_address}', 'UserAddressesController@destroy')->name('user_addresses.destroy');
         Route::post('products/{product}/favorite', 'ProductsController@favor')->name('products.favor');
         Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
+        Route::get('products/favorites', 'ProductsController@favorites')->name('products.favorites');
     });
     // 结束
 });
 
+Route::get('/products', 'ProductsController@index')->name('products.index');
+Route::get('/products/{product}', 'ProductsController@show')->name('products.show');
 
 // // 用户身份验证相关的路由
 // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
