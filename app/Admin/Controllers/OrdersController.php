@@ -35,12 +35,12 @@ class OrdersController extends Controller
      * @param Content $content
      * @return Content
      */
-    public function show($id, Content $content)
+    public function show(Order $order, Content $content)
     {
         return $content
-            ->header('Detail')
+            ->header('查看订单')
             ->description('description')
-            ->body($this->detail($id));
+            ->body(view('admin.orders.show', ['order' => $order]));
     }
 
     /**
@@ -98,7 +98,7 @@ class OrdersController extends Controller
             // 禁用创建按钮，后台不需要创建订单
             $grid->disableCreateButton();
             $grid->actions(function ($actions) {
-                $actions->disableView();
+                
                 // 禁用删除和编辑按钮
                 $actions->disableDelete();
                 $actions->disableEdit();
