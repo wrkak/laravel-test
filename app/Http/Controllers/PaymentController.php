@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderPaid;
 use Endroid\QrCode\QrCode;
 use Carbon\Carbon;
 use App\Models\Order;
@@ -62,6 +63,8 @@ class PaymentController extends Controller
             'payment_no'     => $data->trade_no, // 支付宝订单号
         ]);
 
+ 		$this->afterPaid($order);
+
         return app('alipay')->success();
     }
 
@@ -103,6 +106,8 @@ class PaymentController extends Controller
             'payment_no'     => $data->transaction_id,
         ]);
 
+ 		$this->afterPaid($order);
+
         return app('wechat_pay')->success();
     }
 
@@ -126,4 +131,10 @@ class PaymentController extends Controller
         return response($qrCode->writeString(), 200, ['Content-Type' => $qrCode->getContentType()]);
     }
     
+
+    protected function afterPaid(Order $order)
+    {
+        event(new OrderPaid($order));
+    }
+
 }
