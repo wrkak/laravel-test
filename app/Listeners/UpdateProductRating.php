@@ -14,7 +14,7 @@ class UpdateProductRating implements ShouldQueue
     public function handle(OrderReviewd $event)
     {
         // 通过 with 方法提前加载数据，避免 N + 1 性能问题
-        $items = $event->getOrder()->items()->with(['product'])->get();
+        $items = $event->getkOrder()->items()->with(['product'])->get();
         foreach ($items as $item) {
             $result = OrderItem::query()
                 ->where('product_id', $item->product_id)
