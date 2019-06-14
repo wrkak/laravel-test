@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRequest;
+use App\Exceptions\CouponCodeUnavailableException;
+use App\Models\CouponCode;
 use App\Http\Requests\ApplyRefundRequest;
 use App\Events\OrderReviewd;
 use Carbon\Carbon;
@@ -14,7 +17,7 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
-    public function store(OrderRequest $request)
+    public function store(OrderRequest $request, OrderService $orderService)
     {
     	$user = $request->user();
   //   	//开启事务
@@ -73,8 +76,17 @@ class OrdersController extends Controller
 		// $this->dispatch(new CloseOrder($order, config('app.order_ttl')));
     	
     	$address = UserAddress::find($request->input('address_id'));
+      $coupon  = null;
 
-        return $orderService->store($user, $address, $request->input('remark'), $request->input('items'));
+      // 如果用户提交了优惠码
+      if ($code = $request->input('coupon_code')) {
+          $coupon = CouponCode::where('code', $code)->first();
+          if (!$coupon) {
+              throw new CouponCodeUnavailableException('优惠券不存在');
+          }
+      }
+
+      return $orderService->store($user, $address, $request->input('remark'), $request->input('items'), $coupon);
 
     }
 
