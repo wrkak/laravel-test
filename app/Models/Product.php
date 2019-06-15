@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+     const TYPE_NORMAL = 'normal';
+     const TYPE_CROWDFUNDING = 'crowdfunding';
+
+    public static $typeMap = [
+        self::TYPE_NORMAL  => '普通商品',
+        self::TYPE_CROWDFUNDING => '众筹商品',
+    ];
+
      protected $fillable = [
         'title',
         'description',
@@ -16,6 +24,7 @@ class Product extends Model
         'sold_count',
         'review_count',
         'price',
+        'type',
     ];
 
     protected $casts = [
@@ -41,4 +50,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function crowdfunding()
+    {
+        return $this->hasOne(CrowdfundingProduct::class);
+    }
 }
