@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SeckillOrderRequest;
 use App\Http\Requests\CrowdFundingOrderRequest;
 use App\Models\ProductSku;
 use App\Http\Requests\OrderRequest;
@@ -218,4 +219,14 @@ class OrdersController extends Controller
 
         return $orderService->crowdfunding($user, $address, $sku, $amount);
     }
+
+    public function seckill(SeckillOrderRequest $request, OrderService $orderService)
+    {
+        $user    = $request->user();
+        $address = UserAddress::find($request->input('address_id'));
+        $sku     = ProductSku::find($request->input('sku_id'));
+
+        return $orderService->seckill($user, $address, $sku);
+    }
+    
 }
