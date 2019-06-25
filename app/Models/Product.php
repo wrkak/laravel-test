@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-     const TYPE_NORMAL = 'normal';
-     const TYPE_CROWDFUNDING = 'crowdfunding';
+    const TYPE_NORMAL = 'normal';
+    const TYPE_CROWDFUNDING = 'crowdfunding';
+    const TYPE_SECKILL = 'seckill';
 
     public static $typeMap = [
         self::TYPE_NORMAL  => '普通商品',
         self::TYPE_CROWDFUNDING => '众筹商品',
+        self::TYPE_SECKILL => '秒杀商品',
     ];
 
-     protected $fillable = [
+    protected $fillable = [
         'title',
         'long_title', // 添加 long_title 到 $fillable 属性中
         'description',
@@ -65,11 +67,11 @@ class Product extends Model
     {
         return $this->properties
             // 按照属性名聚合，返回的集合的 key 是属性名，value 是包含该属性名的所有属性集合
-            ->groupBy('name')
-            ->map(function ($properties) {
+        ->groupBy('name')
+        ->map(function ($properties) {
                 // 使用 map 方法将属性集合变为属性值集合
-                return $properties->pluck('value')->all();
-            });
+            return $properties->pluck('value')->all();
+        });
     }    
 
     public function toESArray()
@@ -113,4 +115,10 @@ class Product extends Model
     {
         return $query->whereIn('id', $ids)->orderByRaw(sprintf("FIND_IN_SET(id, '%s')", join(',', $ids)));
     }
+
+    public function seckill()
+    {
+        return $this->hasOne(SeckillProduct::class);
+    }
+    
 }
