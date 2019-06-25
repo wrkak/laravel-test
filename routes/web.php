@@ -12,7 +12,7 @@
 */
 
 
-Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store')->middleware('random_drop:100');
+Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store')->middleware('random_drop:80');
 
 
 Route::get('/test', 'TestController@index')->name('test.index');
