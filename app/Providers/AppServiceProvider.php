@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Str;
 use Elasticsearch\ClientBuilder as ESClientBuilder;
 use Carbon\Carbon;
 use Monolog\Logger;
@@ -21,7 +22,15 @@ class AppServiceProvider extends ServiceProvider
         // 同时 Laravel 还支持通配符，例如 products.* 即代表当渲染 products 目录下的模板时都执行这个 ViewComposer
         \View::composer(['products.index', 'products.show'], \App\Http\ViewComposers\CategoryTreeComposer::class);
 
-                Carbon::setLocale('zh');
+        Carbon::setLocale('zh');
+
+        // 只在本地开发环境启用 SQL 日志
+        if (app()->environment('local')) {
+            \DB::listen(function ($query) {
+                \Log::info(Str::replaceArray('?', $query->bindings, $query->sql));
+            });
+        }
+
     }
 
     /**
