@@ -12,6 +12,7 @@
         "encore/laravel-admin": "1.6.0",
         "endroid/qr-code": "^3.6",
         "fideloper/proxy": "~3.3",
+        "gregwar/captcha": "^1.1",
         "laravel/framework": "5.5.*",
         "laravel/horizon": "~1.0",
         "laravel/tinker": "~1.0",
