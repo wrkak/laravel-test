@@ -28,6 +28,12 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\UpdateProductRating'
         ],
 
+        //api OAuth2.0
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            // add your listeners (aka providers) here
+            'SocialiteProviders\Weixin\WeixinExtendSocialite@handle'
+        ],
+
     ];
 
     /**
