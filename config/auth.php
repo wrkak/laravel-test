@@ -5,7 +5,7 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
-    |--------------------------------------------------------------------------
+    |-------------------k-------------------------------------------------------
     |
     | This option controls the default authentication "guard" and password
     | reset options for your application. You may change these defaults
@@ -42,7 +42,8 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            // 'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],

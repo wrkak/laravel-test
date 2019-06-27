@@ -21,7 +21,6 @@ $api->version('v1', [
 ], function($api) {
 
 
-
 	$api->group([
 		'middleware' => 'api.throttle',
 		'limit' => config('api.rate_limits.sign.limit'),
@@ -42,6 +41,17 @@ $api->version('v1', [
         // 第三方登录
         $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
             ->name('api.socials.authorizations.store');
+
+        // 登录
+        $api->post('authorizations', 'AuthorizationsController@store')
+        	->name('api.authorizations.store');
+        // 刷新token
+        $api->put('authorizations/current', 'AuthorizationsController@update')
+            ->name('api.authorizations.update');
+        // 删除token
+        $api->delete('authorizations/current', 'AuthorizationsController@destroy')
+            ->name('api.authorizations.destroy');
+            
 
 	});
 
@@ -64,12 +74,6 @@ $api->version('v1', [
 // });
 
 
-
-
-
-
-
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
