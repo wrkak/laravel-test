@@ -15,4 +15,8 @@ yarn-error.log
 /public/fonts
 /public/mix-manifest.json
 /resources/wechat_pay
+
+
+
 /app/Http/Controllers/TestController.php
+app/Console/Commands/Test.php
