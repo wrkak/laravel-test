@@ -101,13 +101,14 @@ $api->version('v1', [
             $api->put('user', 'UsersController@update')
                 ->name('api.user.update');
 
-            // // 图片资源
+            // 图片资源
             $api->post('images', 'ImagesController@store')
                 ->name('api.images.store');
 
-            // // 发布话题
-            // $api->post('topics', 'TopicsController@store')
-            //     ->name('api.topics.store');
+            // 创建地址
+            $api->post('user_addresses', 'UserAddressController@store')
+                ->name('api.user_addresses.store');
+
             // $api->patch('topics/{topic}', 'TopicsController@update')
             //     ->name('api.topics.update');
             // $api->delete('topics/{topic}', 'TopicsController@destroy')
