@@ -14,8 +14,6 @@ class UserAddressRequest extends FormRequest
     {
          switch ($this->method()) {
             case 'POST':
-            case 'PUT':
-            case 'PATCH':
                 return [
                     'province'      => 'required',
                     'city'          => 'required',
@@ -24,6 +22,18 @@ class UserAddressRequest extends FormRequest
                     'zip'           => 'required',
                     'contact_name'  => 'required',
                     'contact_phone' => 'required', 
+                ];
+                break;
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'province'      => 'string',
+                    'city'          => 'string',
+                    'district'      => 'string',
+                    'address'       => 'string',
+                    'zip'           => 'string',
+                    'contact_name'  => 'string',
+                    'contact_phone' => 'string', 
                 ];
                 break;
         }

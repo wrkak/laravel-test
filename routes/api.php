@@ -18,7 +18,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
 	'namespace' => 'App\Http\Controllers\Api',
-	'middleware' => 'serializer:array'
+    'middleware' => ['serializer:array', 'bindings']
 ], function($api) {
 
 
@@ -106,13 +106,13 @@ $api->version('v1', [
                 ->name('api.images.store');
 
             // 创建地址
-            $api->post('user_addresses', 'UserAddressController@store')
+            $api->post('user_addresses', 'UserAddressesController@store')
                 ->name('api.user_addresses.store');
 
-            // $api->patch('topics/{topic}', 'TopicsController@update')
-            //     ->name('api.topics.update');
-            // $api->delete('topics/{topic}', 'TopicsController@destroy')
-            //     ->name('api.topics.destroy');
+            $api->patch('user_addresses/{user_address}', 'UserAddressesController@update')
+                ->name('api.user_addresses.update');
+            $api->delete('user_addresses/{user_address}', 'UserAddressesController@destroy')
+                ->name('api.user_addresses.destroy');
 
             // // 发布回复
             // $api->post('topics/{topic}/replies', 'RepliesController@store')
