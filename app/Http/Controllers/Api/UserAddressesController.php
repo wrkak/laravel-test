@@ -42,4 +42,10 @@ class UserAddressesController extends Controller
 		return $this->response->item($user_address, new UserAddressTransformer);
     }
 
+    public function destroy(UserAddress $user_address)
+	{
+		$this->authorize('own', $user_address);
+		$user_address->delete();
+		return $this->response->noContent();
+	}
 }
