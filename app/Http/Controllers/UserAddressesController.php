@@ -47,8 +47,6 @@ class UserAddressesController extends Controller
 
     public function update(UserAddressRequest $request, UserAddress $user_address)
     {
-        dd($user_address->user_id);
-        exit;
        $this->authorize('own',$user_address);
 
        $user_address->update($request->only([

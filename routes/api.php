@@ -108,11 +108,15 @@ $api->version('v1', [
             // 创建地址
             $api->post('user_addresses', 'UserAddressesController@store')
                 ->name('api.user_addresses.store');
-
+            // 修改地址
             $api->patch('user_addresses/{user_address}', 'UserAddressesController@update')
                 ->name('api.user_addresses.update');
+            // 删除地址
             $api->delete('user_addresses/{user_address}', 'UserAddressesController@destroy')
                 ->name('api.user_addresses.destroy');
+            // 地址列表
+            $api->get('user_addresses', 'UserAddressesController@index')
+                ->name('api.user_addresses.index');             
 
             // // 发布回复
             // $api->post('topics/{topic}/replies', 'RepliesController@store')

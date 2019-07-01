@@ -48,4 +48,17 @@ class UserAddressesController extends Controller
 		$user_address->delete();
 		return $this->response->noContent();
 	}
+
+	public function index(Request $request,UserAddress $address)
+	{
+		$addresses =  $request->user()->addresses()->paginate(20);
+		// $query = $address->query();
+
+		// $query->where('user_id', $request->user()->id);
+
+		// $addresses = $query->paginate(20);
+
+		return $this->response->paginator($addresses, new UserAddressTransformer());
+	}
+
 }

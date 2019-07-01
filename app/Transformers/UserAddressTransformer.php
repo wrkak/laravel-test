@@ -7,6 +7,10 @@ use League\Fractal\TransformerAbstract;
 
 class UserAddressTransformer extends TransformerAbstract
 {
+
+      // protected $availableIncludes = ['user'];
+
+
 	public function transform(UserAddress $userAddress)
 	{
 
@@ -24,4 +28,9 @@ class UserAddressTransformer extends TransformerAbstract
 
 		];
 	}
+
+      // public function includeUser(UserAddress $userAddress)
+      // {
+      //       return $this->item($userAddress->user, new UserTransformer());
+      // }
 }
