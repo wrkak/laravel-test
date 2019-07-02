@@ -34,6 +34,11 @@ return [
         'province' => [
             'required' => 'province 不能为空',
         ],
+        'password' => [
+            'min'   => [
+                'string'  => ' :attribute 至少 :min 个字符.',
+            ],
+        ],
     ],
 
     /*
@@ -47,6 +52,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'password' => '密码'
+    ],
 
 ];

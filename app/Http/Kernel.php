@@ -59,5 +59,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'email_verified' => \App\Http\Middleware\CheckIfEmailVerified::class,
         'random_drop' => \App\Http\Middleware\RandomDropSeckillRequest::class,
+        // 接口语言设置
+        'change-locale' => \App\Http\Middleware\ChangeLocale::class,
     ];
 }
