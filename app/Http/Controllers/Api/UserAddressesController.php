@@ -51,7 +51,7 @@ class UserAddressesController extends Controller
 
 	public function index(Request $request,UserAddress $address)
 	{
-		return $this->errorResponse(403, '您还没有通过认证', 1003);
+
 		$addresses =  $request->user()->addresses()->paginate(20);
 		// $query = $address->query();
 
